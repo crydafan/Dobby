@@ -18,22 +18,26 @@ jobs:
           - platform: linux
             runner: ubuntu-latest
             setup: sh scripts/setup_linux_cross_compile.sh
+            platform_args: ""
           - platform: android
             runner: ubuntu-latest
             setup: sh scripts/setup_linux_cross_compile.sh
+            platform_args: --android_ndk_dir=$HOME/opt/ndk-$NDK_VERSION
           - platform: macos
             runner: macos-latest
             setup: sh scripts/setup_macos_cross_compile.sh
+            platform_args: ""
           - platform: iphoneos
             runner: macos-latest
             setup: sh scripts/setup_macos_cross_compile.sh
+            platform_args: ""
     runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@master
       - run: ${{ matrix.setup }}
       - name: Compile
         run: |
-          python3 scripts/platform_builder.py --platform=${{ matrix.platform }} --arch=all
+          python3 scripts/platform_builder.py --platform=${{ matrix.platform }} --arch=all ${{ matrix.platform_args }}
           cp include/dobby.h build/${{ matrix.platform }}
           tar -zcvf build/dobby-${{ matrix.platform }}-all.tar.gz build/${{ matrix.platform }}
       - uses: actions/upload-artifact@v4
