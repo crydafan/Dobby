@@ -8,7 +8,7 @@ include(cmake/build_environment_check.cmake)
 include(cmake/auto_source_group.cmake)
 include(cmake/xcode_generator_helper.cmake)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD 11)
 
