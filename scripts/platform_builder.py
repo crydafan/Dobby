@@ -35,6 +35,7 @@ class PlatformBuilder(object):
     self.library_build_type = library_build_type
     self.platform = platform
     self.arch = arch
+    self.cmake_args = list()
 
     self.cmake_build_dir = f"{self.project_dir}/build/cmake-build-{platform}-{arch}"
     self.output_dir = f"{self.project_dir}/build/{platform}/{arch}"
@@ -118,6 +119,8 @@ class LinuxPlatformBuilder(PlatformBuilder):
     self.cmake_args += [
       "-DCMAKE_SYSTEM_NAME=Linux",
       "-DCMAKE_SYSTEM_PROCESSOR={}".format(arch),
+      "-DCMAKE_EXE_LINKER_FLAGS=-fuse-ld=lld",
+      "-DCMAKE_SHARED_LINKER_FLAGS=-fuse-ld=lld",
     ]
 
 

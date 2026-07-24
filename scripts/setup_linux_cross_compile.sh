@@ -20,6 +20,7 @@ sudo apt-get -y install gcc g++ libc6-dev
 sudo apt-get -y install gcc-i686-linux-gnu g++-i686-linux-gnu
 sudo apt-get -y install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
 sudo apt-get -y install gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+sudo apt-get -y install lld
 
 mkdir -p ~/opt && cd ~/opt
 wget https://dl.google.com/android/repository/android-ndk-r25b-linux.zip &&
