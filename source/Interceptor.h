@@ -10,6 +10,8 @@ public:
 public:
   InterceptEntry *find(addr_t addr);
 
+  InterceptEntry *findByReplaceFunc(addr_t func);
+
   void remove(addr_t addr);
 
   void add(InterceptEntry *entry);

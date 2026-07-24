@@ -128,6 +128,9 @@ int DobbyHook(void *address, dobby_dummy_func_t replace_func, dobby_dummy_func_t
 typedef void (*dobby_instrument_callback_t)(void *address, DobbyRegisterContext *ctx);
 int DobbyInstrument(void *address, dobby_instrument_callback_t pre_handler);
 
+// look up original function by fake function address
+void *DobbyOriginal(dobby_dummy_func_t fake_func);
+
 // destroy and restore code patch
 int DobbyDestroy(void *address);
 
@@ -147,6 +150,12 @@ void dobby_disable_near_branch_trampoline();
 
 #ifdef __cplusplus
 }
+#endif
+
+#ifdef __cplusplus
+#define DOBBY_CALL_ORIGINAL(func, ...) ((decltype(&(func)))DobbyOriginal((dobby_dummy_func_t)(func)))(__VA_ARGS__)
+#else
+#define DOBBY_CALL_ORIGINAL(func, func_sig, ...) ((func_sig)DobbyOriginal((dobby_dummy_func_t)(func)))(__VA_ARGS__)
 #endif
 
 #endif

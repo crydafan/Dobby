@@ -12,6 +12,14 @@ PUBLIC const char *DobbyGetVersion() {
   return "";
 }
 
+PUBLIC void *DobbyOriginal(dobby_dummy_func_t fake_func) {
+  auto entry = Interceptor::SharedInstance()->findByReplaceFunc((addr_t)fake_func);
+  if (entry) {
+    return (void *)entry->relocated_addr;
+  }
+  return nullptr;
+}
+
 PUBLIC int DobbyDestroy(void *address) {
 #if defined(TARGET_ARCH_ARM)
   if ((addr_t)address % 2) {

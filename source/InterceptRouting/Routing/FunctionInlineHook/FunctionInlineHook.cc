@@ -31,6 +31,7 @@ PUBLIC int DobbyHook(void *address, dobby_dummy_func_t replace_func, dobby_dummy
   }
 
   entry = new InterceptEntry(kFunctionInlineHook, (addr_t)address);
+  entry->replace_func = (addr_t)replace_func;
 
   auto *routing = new FunctionInlineHookRouting(entry, replace_func);
   routing->Prepare();

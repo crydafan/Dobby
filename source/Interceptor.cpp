@@ -18,6 +18,15 @@ InterceptEntry *Interceptor::find(addr_t addr) {
   return nullptr;
 }
 
+InterceptEntry *Interceptor::findByReplaceFunc(addr_t func) {
+  for (auto *entry : entries) {
+    if (entry->replace_func == func) {
+      return entry;
+    }
+  }
+  return nullptr;
+}
+
 void Interceptor::add(InterceptEntry *entry) {
   entries.push_back(entry);
 }
